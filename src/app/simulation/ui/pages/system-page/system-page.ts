@@ -1,11 +1,9 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-system-page',
+  selector: 'rtc-system-page',
   imports: [],
   templateUrl: './system-page.html',
   styleUrl: './system-page.scss',
 })
-export class SystemPage {
-
-}
+export class SystemPage {}
