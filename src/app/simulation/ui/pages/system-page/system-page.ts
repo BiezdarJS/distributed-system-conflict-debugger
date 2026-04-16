@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'rtc-system-page',
+  selector: 'ds-system-page',
   imports: [],
   templateUrl: './system-page.html',
   styleUrl: './system-page.scss',

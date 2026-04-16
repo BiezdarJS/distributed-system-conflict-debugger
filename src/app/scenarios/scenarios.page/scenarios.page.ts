@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'rtc-scenarios-page',
+  selector: 'ds-scenarios-page',
   imports: [],
   templateUrl: './scenarios.page.html',
   styleUrl: './scenarios.page.scss',

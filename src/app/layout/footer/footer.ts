@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'rtc-footer',
+  selector: 'ds-footer',
   imports: [],
   templateUrl: './footer.html',
   styleUrl: './footer.scss',
