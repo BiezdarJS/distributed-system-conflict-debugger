@@ -6,12 +6,15 @@ import { provideStore } from '@ngrx/store';
 import { provideEffects } from '@ngrx/effects';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
+import { timelineReducer } from './simulation/state/reducers/timeline.reducer';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideRouter(mainRoutes),
-    provideStore(),
+    provideStore({
+      timeline: timelineReducer,
+    }),
     provideEffects([]),
     provideStoreDevtools({
       maxAge: 25,
