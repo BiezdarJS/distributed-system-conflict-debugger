@@ -1,5 +1,5 @@
 <section class="ui-page">
-  <ds-client-panel [client]="ClientTypeEnum.ClientA" />
+  <ds-client-panel [client]="ClientTypeEnum.ClientA" (userActionInput)="buildModel($event)" />
 
   <!-- <ds-event-timeline />
 

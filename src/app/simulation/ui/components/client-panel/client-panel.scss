@@ -1,3 +1,9 @@
+:host {
+  display: block;
+  width: min(90%, 600px);
+  text-align: center;
+}
+
 section {
   background-color: teal;
   border: 1px solid #000;
