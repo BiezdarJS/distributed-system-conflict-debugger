@@ -1,0 +1,24 @@
+:host {
+  display: inline-flex;
+
+  .ds-icon {
+    display: inline-flex;
+    width: var(#{--ds-icon-size}, 24px);
+    height: var(#{--ds-icon-size}, 24px);
+    position: relative;
+
+    &--span {
+      width: var(#{--ds-icon-size}, 24px);
+      height: var(#{--ds-icon-size}, 24px);
+      display: inline-flex;
+    }
+  }
+
+  ::ng-deep {
+    .ds-icon svg {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
