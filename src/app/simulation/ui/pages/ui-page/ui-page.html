@@ -6,5 +6,8 @@
 
   <ds-event-timeline />
 
-  <!-- <ds-client-panel [client]="ClientTypeEnum.ClientB" /> -->
+  <ds-client-panel
+    [client]="ClientTypeEnum.ClientB"
+    (userActionInput)="buildModel($event)"
+  />
 </section>

@@ -1,7 +1,31 @@
+@let timelineEntriesValue = timelineEntries();
+
 <section class="border-1 border-blue-300/20 rounded-lg shadow-md text-white overflow-hidden">
   <header class="bg-blue-900/70 backdrop-blur-sm p-4 rounded-t-lg">
-    <p class="text-white">EVENT TIMELINE</p>
+    <p>EVENT TIMELINE</p>
   </header>
-  <main class="bg-[#0c121e] p-4"></main>
+  <main class="bg-[#0c121e] p-4">
+    @for (timelineEntry of timelineEntriesValue; track timelineEntry.event.id) {
+      @let timelineEvent = timelineEntry.event;
+      <div
+        class="timeline-event block py-2 mb-2 items-center rounded-md bg-blue-400/10 px-2 py-1 text-xs font-medium"
+      >
+        <span
+          class="timeline-event__badge inline-flex gap-2 bg-blue-500 text-sm font-medium px-2 py-1 rounded"
+          [ngClass]="{
+            'bg-blue-500': timelineEvent.source === clientTypeEnum.ClientA,
+            'bg-green-800': timelineEvent.source === clientTypeEnum.ClientB,
+          }"
+        >
+          {{ timelineEvent.source | clientBadge }}
+        </span>
+        <div class="timeline-event__content">
+          {{ clientTypeLabels[timelineEvent.source] }}
+          zmienił tytuł na
+          {{ timelineEvent.payload.value }}
+        </div>
+      </div>
+    }
+  </main>
   <footer></footer>
 </section>

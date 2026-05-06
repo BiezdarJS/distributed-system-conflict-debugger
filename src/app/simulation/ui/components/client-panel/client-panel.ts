@@ -18,9 +18,9 @@ import { UserActionInput } from '@shared/models/event/user-action-input.type';
 import { DsIconsComponent } from '@shared/ui/ds-icons/ds-icons.component';
 import { InputShared } from '@shared/ui/input-shared/input-shared';
 import { TextareaShared } from '@shared/ui/textarea-shared/textarea-shared';
-import { debounceTime, filter } from 'rxjs';
-import { toObservable } from '@angular/core/rxjs-interop';
-import { DatePipe } from '@angular/common';
+import { filter, Subject } from 'rxjs';
+import { DatePipe, NgClass } from '@angular/common';
+import { ClientBadgePipe } from '@shared/pipes/client-badge-pipe';
 
 type UserInteractionEventLog = {
   type: 'EDITING_STARTED' | 'EDITING_CHANGED' | 'EDITING_STOPPED';
@@ -31,49 +31,38 @@ type UserInteractionEventLog = {
 
 @Component({
   selector: 'ds-client-panel',
-  imports: [InputShared, TextareaShared, DsIconsComponent, DatePipe, ReactiveFormsModule],
+  imports: [
+    NgClass,
+    InputShared,
+    TextareaShared,
+    DsIconsComponent,
+    DatePipe,
+    ClientBadgePipe,
+    ReactiveFormsModule,
+  ],
   templateUrl: './client-panel.html',
   styleUrl: './client-panel.scss',
 })
 export class ClientPanel implements OnInit {
-  readonly client: InputSignal<ClientTypeEnum | null> = input<ClientTypeEnum | null>(null);
+  readonly client: InputSignal<ClientTypeEnum> = input.required<ClientTypeEnum>();
   readonly userActionInput: OutputEmitterRef<UserActionInput> = output();
 
   readonly titleElement = viewChild<ElementRef>('titleElement');
 
-  readonly clientInitialValue: Signal<string> = computed(() => {
-    const client = this.client();
+  refreshTrigger$ = new Subject<void>();
 
-    if (client === null) {
-      return '';
-    }
-    return this.clientTypeLabels[client]?.split(' ').at(-1) ?? '';
-  });
-
+  // userActions contains all the actions logged in client-panel box
   userActions = signal<UserInteractionEventLog[]>([]);
+  lastTitleValue = signal<string>('');
 
-  readonly title = new FormControl('', { nonNullable: true, updateOn: 'change' });
+  readonly title = new FormControl('', { nonNullable: true });
   readonly description = new FormControl('', { nonNullable: true });
 
   readonly clientTypeLabels = ClientTypeLabels;
-
-  constructor() {
-    toObservable(this.userActions).subscribe((data: any) => console.log(data));
-  }
+  readonly clientTypeEnum = ClientTypeEnum;
 
   ngOnInit(): void {
-    this.title.valueChanges
-      .pipe(
-        debounceTime(300),
-        filter((inputValue) => !!inputValue),
-      )
-      .subscribe((inputValue) => {
-        const client = this.client();
-
-        if (client === null) {
-          return;
-        }
-      });
+    this.initializeTitleUpdateStream();
   }
 
   startEditing(): void {
@@ -97,28 +86,42 @@ export class ClientPanel implements OnInit {
   }
 
   endEditing(): void {
-    const client = this.client();
+    this.refreshTrigger$.next();
+  }
 
-    if (client === null) {
-      return;
-    }
+  private initializeTitleUpdateStream() {
+    this.refreshTrigger$
+      .pipe(
+        filter(() => {
+          const newTitleValue = this.title.getRawValue();
+          return newTitleValue !== this.lastTitleValue();
+        }),
+      )
+      .subscribe(() => {
+        const client = this.client();
+        if (client === null) {
+          return;
+        }
 
-    this.userActions.update((state) => {
-      return [
-        ...state,
-        {
-          type: 'EDITING_CHANGED',
+        this.userActions.update((localState) => {
+          return [
+            ...localState,
+            {
+              type: 'EDITING_CHANGED',
+              source: client,
+              value: 'Zapisano',
+              timestamp: new Date().getTime(),
+            },
+          ];
+        });
+
+        this.userActionInput.emit({
+          type: 'UPDATE_TITLE',
+          value: this.title.getRawValue(),
           source: client,
-          value: 'Zapisano',
-          timestamp: new Date().getTime(),
-        },
-      ];
-    });
+        });
 
-    this.userActionInput.emit({
-      type: 'UPDATE_TITLE',
-      value: this.title.getRawValue(),
-      source: client,
-    });
+        this.lastTitleValue.set(this.title.getRawValue());
+      });
   }
 }

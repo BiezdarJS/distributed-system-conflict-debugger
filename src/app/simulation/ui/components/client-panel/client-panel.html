@@ -3,21 +3,23 @@
 <section class="border-1 border-blue-300/20 rounded-lg shadow-md text-white overflow-hidden">
   <header class="bg-blue-900/70 backdrop-blur-sm p-4 rounded-t-lg">
     <p class="text-white">
-      @if (clientType !== null) {
-        {{ clientTypeLabels[clientType] }}
-      }
+      {{ clientTypeLabels[clientType] }}
     </p>
   </header>
   <main class="bg-[#0c121e] p-4">
     <!-- Introductory Info -->
     <div class="intoductory-info flex justify-between items-center">
       <div class="intoductory-info__left flex gap-2 items-center text-white">
-        <span class="flex gap-2 bg-blue-500 text-sm font-medium px-2 py-1 rounded">
-          {{ clientInitialValue() }}
+        <span
+          class="flex gap-2 text-sm font-medium px-2 py-1 rounded"
+          [ngClass]="{
+            'bg-blue-500': clientType === clientTypeEnum.ClientA,
+            'bg-green-800': clientType === clientTypeEnum.ClientB,
+          }"
+        >
+          {{ clientType | clientBadge }}
         </span>
-        @if (clientType !== null) {
-          {{ clientTypeLabels[clientType] }}
-        }
+        {{ clientTypeLabels[clientType] }}
       </div>
       <div class="intoductory-info__right">
         <span
