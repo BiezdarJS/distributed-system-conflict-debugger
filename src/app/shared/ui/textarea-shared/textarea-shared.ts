@@ -25,9 +25,11 @@ export class TextareaShared implements ControlValueAccessor {
       this._currentValue.set(newValue);
     }
   }
+
   registerOnChange(fn: (value: string) => void): void {
     this.onChange = fn;
   }
+
   registerOnTouched(fn: any): void {
     this.onTouched = fn;
   }

@@ -13,7 +13,7 @@
     <div class="intoductory-info flex justify-between items-center">
       <div class="intoductory-info__left flex gap-2 items-center text-white">
         <span class="flex gap-2 bg-blue-500 text-sm font-medium px-2 py-1 rounded">
-          {{ clientInitial() }}
+          {{ clientInitialValue() }}
         </span>
         @if (clientType !== null) {
           {{ clientTypeLabels[clientType] }}
@@ -30,12 +30,12 @@
     <div class="editor-state rounded-lg shadow-xlmt-4 py-4">
       <div class="editor-state__top bg-[#151b26] p-6 pb-0">
         <div class="editor-name flex justify-between mb-4">
-          <div class="editor-name__left flex gap-2 align-center">
+          <div class="editor-name__left flex gap-2 items-center">
             <ds-icons
               [basic]="'document-text'"
               [size]="20"
             />
-            Dokument: Projekt X
+            <span class="text-sm">Dokument: Projekt X</span>
           </div>
           <div class="editor-name__right">
             <span
@@ -46,11 +46,15 @@
         </div>
         <div class="form-field mb-4">
           <p class="text-xs pb-1">Tytuł</p>
-          <ds-input-shared [formControl]="userAction" />
+          <ds-input-shared
+            (emitFocusEvent)="startEditing()"
+            (emitBlurEvent)="endEditing()"
+            [formControl]="title"
+          />
         </div>
         <div class="form-field">
           <p class="text-xs pb-1">Opis</p>
-          <ds-textarea-shared [formControl]="userAction" />
+          <ds-textarea-shared [formControl]="description" />
         </div>
       </div>
       <div class="editor-state__bottom bg-[#13181d] py-2 px-4 text-xs">
@@ -69,21 +73,30 @@
         </div>
       </div>
       <div class="user-actions__content">
-        <div
+        @for (action of userActions(); track action.timestamp) {
+          @switch (action.type) {
+            @case ('EDITING_STARTED') {
+              <div
+                class="block py-2 mb-2 items-center rounded-md bg-blue-400/10 px-2 py-1 text-xs font-medium text-blue-400 inset-ring inset-ring-blue-400/30"
+              >
+                {{ action.timestamp | date: 'hh:mm:ss' }}
+                {{ action.value }}
+              </div>
+            }
+            @case ('EDITING_CHANGED') {
+              <div
+                class="block py-2 mb-2 items-center rounded-md bg-green-400/10 px-2 py-1 text-xs font-medium text-green-400 inset-ring inset-ring-green-500/20"
+              >
+                Zapisano
+              </div>
+            }
+          }
+        }
+        <!-- <div
           class="block py-2 mb-2 items-center rounded-md bg-blue-400/10 px-2 py-1 text-xs font-medium text-blue-400 inset-ring inset-ring-blue-400/30"
         >
           12:01:05 Zmienił tytuł na : "Projekt X - Plan Q2"
-        </div>
-        <div
-          class="block py-2 mb-2 items-center rounded-md bg-blue-400/10 px-2 py-1 text-xs font-medium text-blue-400 inset-ring inset-ring-blue-400/30"
-        >
-          Edytuje opis...
-        </div>
-        <div
-          class="block py-2 mb-2 items-center rounded-md bg-green-400/10 px-2 py-1 text-xs font-medium text-green-400 inset-ring inset-ring-green-500/20"
-        >
-          Zapisano
-        </div>
+        </div> -->
       </div>
     </div>
   </main>

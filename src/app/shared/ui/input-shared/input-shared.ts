@@ -1,4 +1,12 @@
-import { Component, computed, signal, Signal, WritableSignal } from '@angular/core';
+import {
+  Component,
+  computed,
+  output,
+  OutputEmitterRef,
+  signal,
+  Signal,
+  WritableSignal,
+} from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
@@ -20,14 +28,27 @@ export class InputShared implements ControlValueAccessor {
   private onChange = (value: string) => {};
   private onTouched = (value: string) => {};
 
+  emitFocusEvent: OutputEmitterRef<void> = output();
+  emitBlurEvent: OutputEmitterRef<void> = output();
+
+  onFocus() {
+    this.emitFocusEvent.emit();
+  }
+
+  onBlur() {
+    this.emitBlurEvent.emit();
+  }
+
   writeValue(newValue: any): void {
     if (newValue) {
       this._currentValue.set(newValue);
     }
   }
+
   registerOnChange(fn: (value: string) => void): void {
     this.onChange = fn;
   }
+
   registerOnTouched(fn: any): void {
     this.onTouched = fn;
   }
