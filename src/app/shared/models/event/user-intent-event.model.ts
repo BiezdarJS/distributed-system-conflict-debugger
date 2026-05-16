@@ -7,5 +7,6 @@ export type UserIntentEvent = {
     value: string;
   };
   source: ClientTypeEnum;
+  baseVersion: number;
   createdAt: number;
 };

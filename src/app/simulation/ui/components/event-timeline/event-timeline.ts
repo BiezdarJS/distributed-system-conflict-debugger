@@ -1,15 +1,12 @@
-import { Component, inject } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
+import { PendingOperationsList } from './pending-operations-list/pending-operations-list';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { Store } from '@ngrx/store';
 import { selectTimelineEntries } from '../../../state/selectors/timeline.selector';
-import { NgClass } from '@angular/common';
-import { ClientBadgePipe } from '@shared/pipes/client-badge-pipe';
-import { ClientTypeLabels } from '@shared/consts/client-type-label.const';
-import { ClientTypeEnum } from '@shared/enums/client-type.enum';
 
 @Component({
   selector: 'ds-event-timeline',
-  imports: [NgClass, ClientBadgePipe],
+  imports: [PendingOperationsList],
   templateUrl: './event-timeline.html',
   styleUrl: './event-timeline.scss',
 })
@@ -20,6 +17,7 @@ export class EventTimeline {
     initialValue: [],
   });
 
-  readonly clientTypeLabels = ClientTypeLabels;
-  readonly clientTypeEnum = ClientTypeEnum;
+  readonly timelineEvents = computed(() =>
+    this.timelineEntries().map((timelineEntry) => timelineEntry.event),
+  );
 }

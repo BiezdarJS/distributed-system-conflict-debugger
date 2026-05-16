@@ -1,0 +1,16 @@
+@let pendingOperationsListData = pendingOperationsList();
+
+@if (pendingOperationsListData.length) {
+  @for (
+    pendingOperationItem of pendingOperationsListData;
+    track pendingOperationItem.id;
+    let last = $last
+  ) {
+    <li
+      class="my-2"
+      ds-pending-operation
+      [pendingOperationItem]="pendingOperationItem"
+      [ngClass]="{ 'mb-2': !last }"
+    ></li>
+  }
+}
