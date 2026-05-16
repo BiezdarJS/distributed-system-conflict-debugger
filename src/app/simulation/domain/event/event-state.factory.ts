@@ -10,6 +10,7 @@ export function createNewTimelineEvent(payload: UserActionInput): TimelineEntry 
         value: payload.value,
       },
       source: payload.source,
+      baseVersion: 1,
       createdAt: Date.now(),
     },
     state: {

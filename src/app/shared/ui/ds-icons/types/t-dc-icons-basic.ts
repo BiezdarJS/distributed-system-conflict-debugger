@@ -1,1 +1,1 @@
-export type TEcIconsBasic = 'document-text' | 'pencil-square';
+export type TEcIconsBasic = 'arrow-down' | 'arrow-up' | 'document-text' | 'pencil-square';

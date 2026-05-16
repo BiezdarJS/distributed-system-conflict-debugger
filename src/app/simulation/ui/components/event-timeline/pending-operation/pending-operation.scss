@@ -1,0 +1,28 @@
+.pending-operation {
+  display: grid;
+  grid-template-columns: 60% 30% 10%;
+  align-items: center;
+}
+
+.operation-identity {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  padding-right: 20px;
+  &__badge {
+    align-self: center;
+  }
+  &__content {
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+  }
+}
+
+.operation-scheduling {
+  &__title {
+  }
+  &__dispatch-title {
+  }
+  &__slider {
+  }
+}
