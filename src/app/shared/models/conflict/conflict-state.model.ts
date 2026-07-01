@@ -8,5 +8,6 @@ export type ConflictEntry = {
   eventId: string;
   source: 'A' | 'B';
   value: string;
-  createdAt: number;
+  baseVersion: number;
+  logicalTimestamp: number;
 };

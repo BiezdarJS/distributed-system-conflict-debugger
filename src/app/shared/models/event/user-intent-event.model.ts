@@ -8,5 +8,5 @@ export type UserIntentEvent = {
   };
   source: ClientTypeEnum;
   baseVersion: number;
-  createdAt: number;
+  logicalTimestamp: number;
 };

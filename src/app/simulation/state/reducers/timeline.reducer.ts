@@ -12,7 +12,7 @@ const initialState: TimelineEntry[] = [];
 //         value: 'string',
 //       },
 //       source: 'A',
-//       createdAt: 0,
+//       logicalTimestamp: 0,
 //     },
 //     state: {
 //       status: 'QUEUED',

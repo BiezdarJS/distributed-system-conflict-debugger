@@ -11,7 +11,7 @@ export function createNewTimelineEvent(payload: UserActionInput): TimelineEntry 
       },
       source: payload.source,
       baseVersion: 1,
-      createdAt: Date.now(),
+      logicalTimestamp: Date.now(),
     },
     state: {
       status: 'QUEUED',
