@@ -21,31 +21,73 @@
     <div class="pending-operation__scheduling">
       <div class="operation-scheduling__title"></div>
       <div class="operation-scheduling__dispatch">
+        <p class="text-xs font-semibold">Scheduled: &nbsp;T+0000ms</p>
         <label
-          class="scheduling-displatch__label"
+          class="scheduling-displatch__label text-xs"
           for="dispatch-slider"
         >
           Dispatch Offset
         </label>
-        <input
-          id="dispatch-slider"
-          class="scheduling-displatch__slider"
-          type="range"
-          min="1"
-          max="100"
-          value="50"
-        />
+
+        <div class="scheduling-displatch__controls">
+          <input
+            id="dispatch-slider"
+            class="scheduling-displatch__slider"
+            type="range"
+            min="1"
+            max="100"
+            value="50"
+            [style.--value.%]="dispatchOffset"
+            [(ngModel)]="dispatchOffset"
+          />
+
+          <input
+            class="scheduling-displatch__value"
+            type="number"
+            min="1"
+            max="100"
+            value="50"
+            [(ngModel)]="dispatchOffset"
+          />
+
+          <span class="text-xs">ms</span>
+        </div>
       </div>
     </div>
     <div class="pending-operation__controls">
-      <ds-icons
-        [basic]="'arrow-up'"
-        [size]="20"
-      />
-      <ds-icons
-        [basic]="'arrow-down'"
-        [size]="20"
-      />
+      <div class="pending-operation__move-controls">
+        <button
+          type="button"
+          aria-label="Przesuń wyżej"
+        >
+          <ds-icons
+            [basic]="'arrow-up'"
+            [size]="16"
+          />
+        </button>
+
+        <button
+          type="button"
+          aria-label="Przesuń niżej"
+        >
+          <ds-icons
+            [basic]="'arrow-down'"
+            [size]="16"
+          />
+        </button>
+      </div>
+
+      <div class="pending-operation__delete-control">
+        <button
+          type="button"
+          aria-label="Usuń operację"
+        >
+          <ds-icons
+            [basic]="'trash'"
+            [size]="16"
+          />
+        </button>
+      </div>
     </div>
   </div>
 }

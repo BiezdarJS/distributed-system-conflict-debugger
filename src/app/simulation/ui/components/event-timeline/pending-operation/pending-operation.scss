@@ -1,7 +1,48 @@
+$trackHeight: 4px;
+$thumbHeight: 10px;
+
 .pending-operation {
+  padding: 10px 0;
+  border-bottom: 1px solid #2a3443;
   display: grid;
-  grid-template-columns: 60% 30% 10%;
-  align-items: center;
+  grid-template-columns: 50% 35% auto;
+
+  &__controls {
+    display: flex;
+    border-left: 1px solid #1f3045;
+  }
+
+  &__move-controls {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 10px;
+    border-right: 1px solid #1f3045;
+  }
+
+  &__delete-control {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    color: #ef4444;
+  }
+
+  button {
+    display: grid;
+    place-items: center;
+    padding: 0;
+    color: inherit;
+    background: none;
+    border: 0;
+    cursor: pointer;
+  }
+
+  &__scheduling {
+    display: flex;
+    align-items: center;
+    padding-right: 20px;
+  }
 }
 
 .operation-identity {
@@ -18,11 +59,74 @@
   }
 }
 
-.operation-scheduling {
+.operation- {
+  padding-right: 20px;
   &__title {
   }
   &__dispatch-title {
   }
   &__slider {
+  }
+}
+
+.scheduling-displatch {
+  &__label {
+    font-size: 11px;
+  }
+  &__controls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  &__slider {
+    background: linear-gradient(
+      to right,
+      #0fa97f 0%,
+      #0fa97f var(--value),
+      #26364c var(--value),
+      #26364c 100%
+    );
+    width: 100%;
+    accent-color: #1687ff;
+    appearance: none;
+    -webkit-appearance: none;
+
+    &::-webkit-slider-runnable-track {
+      height: 4px;
+      background: transparent;
+      border-radius: 10px;
+    }
+
+    &::-webkit-slider-thumb {
+      width: 10px;
+      height: 10px;
+      margin-top: calc(($trackHeight - $thumbHeight) / 2);
+      appearance: none;
+      -webkit-appearance: none;
+      border: 0;
+      border-radius: 50%;
+      background: #dbe5f0;
+    }
+  }
+
+  &__value {
+    width: 32px;
+    height: 20px;
+    padding: 0 5px;
+    font-size: 11px;
+    text-align: center;
+    color: inherit;
+    background: transparent;
+    border: 1px solid #2d3b4f;
+    border-radius: 6px;
+    box-sizing: border-box;
+    appearance: textfield;
+
+    &::-webkit-inner-spin-button,
+    &::-webkit-outer-spin-button {
+      appearance: none;
+      margin: 0;
+    }
   }
 }

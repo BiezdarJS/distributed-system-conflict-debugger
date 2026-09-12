@@ -1,6 +1,6 @@
 .ui-page {
   display: grid;
-  grid-template-columns: 350px 500px 350px;
+  grid-template-columns: minmax(auto, 350px) minmax(auto, 500px) minmax(auto, 350px);
   justify-content: center;
   gap: 20px;
 }

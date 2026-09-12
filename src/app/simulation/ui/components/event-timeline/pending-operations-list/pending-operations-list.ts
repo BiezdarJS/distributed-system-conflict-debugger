@@ -1,10 +1,7 @@
-import { ChangeDetectionStrategy, Component, inject, input } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
-import { Store } from '@ngrx/store';
-import { selectTimelineEntries } from '../../../../state/selectors/timeline.selector';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { PendingOperation } from '../pending-operation/pending-operation';
 import { NgClass } from '@angular/common';
-import { UserIntentEvent } from '@shared/models/event/user-intent-event.model';
+import { UserIntentEvent } from '@shared/models/event/client/scheduled-operation.model';
 
 @Component({
   selector: 'ul[ds-pending-operations-list]',

@@ -1,7 +1,7 @@
-import { TimelineEntry } from '@shared/models/event/timeline-entry.model';
-import { UserActionInput } from '@shared/models/event/user-action-input.type';
+import { ScheduledOperation } from '@shared/models/event/client/scheduled-operation.model';
+import { UserActionInput } from '@shared/models/event/client/user-action-input.type';
 
-export function createNewTimelineEvent(payload: UserActionInput): TimelineEntry {
+export function createNewTimelineEvent(payload: UserActionInput): ScheduledOperation {
   return {
     event: {
       id: crypto.randomUUID(),
