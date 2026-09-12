@@ -1,4 +1,4 @@
 import { createFeatureSelector } from '@ngrx/store';
-import { TimelineEntry } from '@shared/models/event/timeline-entry.model';
+import { ScheduledOperation } from '@shared/models/event/client/scheduled-operation.model';
 
-export const selectTimelineEntries = createFeatureSelector<TimelineEntry[]>('timeline');
+export const selectTimelineEntries = createFeatureSelector<ScheduledOperation[]>('timeline');

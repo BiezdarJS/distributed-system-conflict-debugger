@@ -1,7 +1,7 @@
 import { createAction, createReducer, on, props } from '@ngrx/store';
-import { TimelineEntry } from '@shared/models/event/timeline-entry.model';
+import { ScheduledOperation } from '@shared/models/event/client/scheduled-operation.model';
 
-const initialState: TimelineEntry[] = [];
+const initialState: ScheduledOperation[] = [];
 
 // const initialState: TimelineEntry[] = [
 //   {
@@ -26,8 +26,11 @@ const initialState: TimelineEntry[] = [];
 export const timelineReducer = createReducer(
   initialState,
   on(
-    createAction('[Timeline Event] Add Timeline Entry]', props<{ timelineEntry: TimelineEntry }>()),
-    (state: TimelineEntry[], { timelineEntry }) => [
+    createAction(
+      '[Timeline Event] Add Timeline Entry]',
+      props<{ timelineEntry: ScheduledOperation }>(),
+    ),
+    (state: ScheduledOperation[], { timelineEntry }) => [
       ...state,
       {
         event: timelineEntry.event,

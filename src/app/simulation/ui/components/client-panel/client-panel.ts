@@ -14,7 +14,7 @@ import {
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { ClientTypeLabels } from '@shared/consts/client-type-label.const';
 import { ClientTypeEnum } from '@shared/enums/client-type.enum';
-import { UserActionInput } from '@shared/models/event/user-action-input.type';
+import { UserActionInput } from '@shared/models/event/client/user-action-input.type';
 import { DsIconsComponent } from '@shared/ui/ds-icons/ds-icons.component';
 import { InputShared } from '@shared/ui/input-shared/input-shared';
 import { TextareaShared } from '@shared/ui/textarea-shared/textarea-shared';
