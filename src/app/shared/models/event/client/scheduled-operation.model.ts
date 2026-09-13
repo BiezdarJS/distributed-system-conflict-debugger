@@ -5,6 +5,17 @@ export type ScheduledOperation = {
   state: ProcessingState;
 };
 
+export type UserIntentEvent = {
+  id: string;
+  type: 'UPDATE_TITLE' | 'UPDATE_DESCRIPTION';
+  payload: {
+    value: string;
+  };
+  source: ClientTypeEnum;
+  baseVersion: number;
+  logicalTimestamp: number;
+};
+
 export type ProcessingState = {
   status:
     | 'QUEUED'
@@ -17,15 +28,4 @@ export type ProcessingState = {
   delay?: number;
   receivedAt?: number;
   processedAt?: number;
-};
-
-export type UserIntentEvent = {
-  id: string;
-  type: 'UPDATE_TITLE' | 'UPDATE_DESCRIPTION';
-  payload: {
-    value: string;
-  };
-  source: ClientTypeEnum;
-  baseVersion: number;
-  logicalTimestamp: number;
 };

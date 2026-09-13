@@ -10,7 +10,10 @@ import { provideStore } from '@ngrx/store';
 import { provideEffects } from '@ngrx/effects';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
-import { timelineReducer } from './simulation/state/reducers/timeline.reducer';
+import {
+  scheduledOperationsReducer,
+  simulationTimelineReducer,
+} from './simulation/state/reducers/timeline.reducer';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -18,7 +21,8 @@ export const appConfig: ApplicationConfig = {
     provideBrowserGlobalErrorListeners(),
     provideRouter(mainRoutes),
     provideStore({
-      timeline: timelineReducer,
+      scheduledOperations: scheduledOperationsReducer,
+      simulationTimeline: simulationTimelineReducer,
     }),
     provideEffects([]),
     provideStoreDevtools({

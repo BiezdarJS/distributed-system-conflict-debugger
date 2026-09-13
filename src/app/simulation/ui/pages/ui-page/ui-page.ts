@@ -22,10 +22,10 @@ export class UiPage {
       return;
     }
 
-    const timelineEntry = createNewTimelineEvent(event);
+    const scheduledOperationEntry = createNewTimelineEvent(event);
     this.store.dispatch({
-      type: '[Timeline Event] Add Timeline Entry]',
-      timelineEntry,
+      type: '[Scheduled Operation Event] Add Scheduled Operation Entry]',
+      scheduledOperationEntry,
     });
   }
 }
