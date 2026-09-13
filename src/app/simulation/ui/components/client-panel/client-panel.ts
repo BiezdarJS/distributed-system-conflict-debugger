@@ -74,7 +74,6 @@ export class ClientPanel implements OnInit {
 
     this.userActions.update((state) => {
       return [
-        ...state,
         {
           type: 'EDITING_STARTED',
           source: client,
@@ -103,9 +102,8 @@ export class ClientPanel implements OnInit {
           return;
         }
 
-        this.userActions.update((localState) => {
+        this.userActions.update(() => {
           return [
-            ...localState,
             {
               type: 'EDITING_CHANGED',
               source: client,

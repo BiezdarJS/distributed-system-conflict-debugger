@@ -1,0 +1,6 @@
+@use 'colors';
+
+button {
+  color: colors.$white;
+  cursor: pointer !important;
+}

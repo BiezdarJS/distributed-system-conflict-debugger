@@ -3,14 +3,14 @@
     <p>EVENT TIMELINE</p>
   </header>
   <main class="bg-[#0c121e] p-4">
-    @if (timelineEvents().length) {
+    @if (scheduledOperations().length) {
       <section>
         <header class="bg-blue-900/70 backdrop-blur-sm p-4 rounded-t-lg">
           <p>Pending queue</p>
         </header>
         <ul
           ds-pending-operations-list
-          [pendingOperationsList]="timelineEvents()"
+          [pendingOperationsList]="scheduledOperations()"
         ></ul>
       </section>
     }
