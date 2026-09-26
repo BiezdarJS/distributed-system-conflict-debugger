@@ -1,7 +1,9 @@
 import { inject, Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { ScheduledOperation } from '@shared/models/event/client/scheduled-operation.model';
-import { concatMap, delay, from, Observable, of, tap } from 'rxjs';
+import { SimulationEvent } from '@shared/models/event/client/simulation-event.model';
+import { concatMap, delay, from, mergeMap, Observable, of, switchMap, tap, timer } from 'rxjs';
+import { createDispatched$, createInFlight$ } from '../domain/event/event-state.factory';
 
 @Injectable({
   providedIn: 'root',
@@ -9,24 +11,13 @@ import { concatMap, delay, from, Observable, of, tap } from 'rxjs';
 export class Engine {
   private readonly store = inject(Store);
 
-  public executeTasksInOrder(operationsToExecute: ScheduledOperation[]): Observable<unknown> {
+  public executeTasksInOrder(
+    operationsToExecute: ScheduledOperation[],
+  ): Observable<SimulationEvent> {
     return from(operationsToExecute).pipe(
-      // zwracamy SimulationEvent
-      concatMap((operation) =>
-        of({
-          id: operation.event.id,
-          type: operation.event.type,
-          logicalTimestamp: operation.event.logicalTimestamp,
-          source: operation.event.source,
-          operationId: operation.event.id,
-        }).pipe(
-          delay(operation.event.logicalTimestamp),
-          tap((simulationEvent) => {
-            this.store.dispatch({
-              type: '[Simulation Timeline Event] Add Simulation Timeline Entry]',
-              simulationEvent,
-            });
-          }),
+      mergeMap((operation) =>
+        createDispatched$(operation, this.store).pipe(
+          concatMap((eventInDispatchState) => createInFlight$(eventInDispatchState, this.store)),
         ),
       ),
     );

@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PendingOperation } from './pending-operation';
+import { SimulationEventsList } from './simulation-events-list';
 
-describe('PendingOperation', () => {
-  let component: PendingOperation;
-  let fixture: ComponentFixture<PendingOperation>;
+describe('SimulationEventsList', () => {
+  let component: SimulationEventsList;
+  let fixture: ComponentFixture<SimulationEventsList>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [PendingOperation]
+      imports: [SimulationEventsList]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(PendingOperation);
+    fixture = TestBed.createComponent(SimulationEventsList);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });

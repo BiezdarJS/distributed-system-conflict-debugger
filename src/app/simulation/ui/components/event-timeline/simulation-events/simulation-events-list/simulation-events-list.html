@@ -1,0 +1,16 @@
+@let simulationEventsListData = simulationEventsList();
+
+@if (simulationEventsListData?.length) {
+  @for (
+    simulationEventItem of simulationEventsListData;
+    track simulationEventItem.id;
+    let last = $last
+  ) {
+    <li
+      class="my-2"
+      ds-simulation-event
+      [simulationEventItem]="simulationEventItem"
+      [ngClass]="{ 'mb-2': !last }"
+    ></li>
+  }
+}

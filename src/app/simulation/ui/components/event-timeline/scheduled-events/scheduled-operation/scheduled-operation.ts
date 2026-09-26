@@ -8,14 +8,14 @@ import { FormsModule } from '@angular/forms';
 import { UserIntentEvent } from '@shared/models/event/client/scheduled-operation.model';
 
 @Component({
-  selector: 'li[ds-pending-operation]',
+  selector: 'li[ds-scheduled-operation]',
   imports: [FormsModule, NgClass, DsIconsComponent, ClientBadgePipe],
-  templateUrl: './pending-operation.html',
-  styleUrl: './pending-operation.scss',
+  templateUrl: './scheduled-operation.html',
+  styleUrl: './scheduled-operation.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PendingOperation {
-  readonly pendingOperationItem = input.required<UserIntentEvent>();
+export class ScheduledOperation {
+  readonly scheduledOperationItem = input.required<UserIntentEvent>();
 
   readonly dispatchOffset = 50;
 

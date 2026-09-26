@@ -1,16 +1,30 @@
+@let scheduledOperationsData = scheduledOperations();
+@let events = simulationEvents();
+
 <section class="border-1 border-blue-300/20 rounded-lg shadow-md text-white overflow-hidden">
   <header class="bg-blue-900/70 backdrop-blur-sm p-4 rounded-t-lg">
     <p>EVENT TIMELINE</p>
   </header>
   <main class="bg-[#0c121e] p-4">
-    @if (scheduledOperations().length) {
+    @if (scheduledOperationsData.length) {
       <section>
         <header class="bg-blue-900/70 backdrop-blur-sm p-4 rounded-t-lg">
-          <p>Pending queue</p>
+          <p>Scheduled queue</p>
         </header>
         <ul
-          ds-pending-operations-list
-          [pendingOperationsList]="scheduledOperations()"
+          ds-scheduled-operations-list
+          [scheduledOperationsList]="scheduledOperationsData"
+        ></ul>
+      </section>
+    }
+    @if (events.length) {
+      <section>
+        <header class="bg-blue-900/70 backdrop-blur-sm p-4 rounded-t-lg">
+          <p>EVENTS</p>
+        </header>
+        <ul
+          ds-simulation-events-list
+          [simulationEventsList]="events"
         ></ul>
       </section>
     }

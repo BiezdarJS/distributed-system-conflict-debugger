@@ -1,24 +1,24 @@
-@let pendingOperationItemData = pendingOperationItem();
+@let scheduledOperationItemData = scheduledOperationItem();
 
-@if (pendingOperationItemData) {
-  <div class="pending-operation">
-    <div class="pending-operation__identity operation-identity">
+@if (scheduledOperationItemData) {
+  <div class="scheduled-operation">
+    <div class="scheduled-operation__identity operation-identity">
       <span
         class="operation-identity__badge inline-flex gap-2 bg-blue-500 text-sm font-medium px-2 py-1 rounded"
         [ngClass]="{
-          'bg-blue-500': pendingOperationItemData.source === clientTypeEnum.ClientA,
-          'bg-green-800': pendingOperationItemData.source === clientTypeEnum.ClientB,
+          'bg-blue-500': scheduledOperationItemData.source === clientTypeEnum.ClientA,
+          'bg-green-800': scheduledOperationItemData.source === clientTypeEnum.ClientB,
         }"
       >
-        {{ pendingOperationItemData.source | clientBadge }}
+        {{ scheduledOperationItemData.source | clientBadge }}
       </span>
       <div class="operation-identity__content text-xs">
-        {{ clientTypeLabels[pendingOperationItemData.source] }}
+        {{ clientTypeLabels[scheduledOperationItemData.source] }}
         zmienił tytuł na
-        {{ pendingOperationItemData.payload.value }}
+        {{ scheduledOperationItemData.payload.value }}
       </div>
     </div>
-    <div class="pending-operation__scheduling">
+    <div class="scheduled-operation__scheduling">
       <div class="operation-scheduling__title"></div>
       <div class="operation-scheduling__dispatch">
         <p class="text-xs font-semibold">Scheduled: &nbsp;T+0000ms</p>
@@ -54,8 +54,8 @@
         </div>
       </div>
     </div>
-    <div class="pending-operation__controls">
-      <div class="pending-operation__move-controls">
+    <div class="scheduled-operation__controls">
+      <div class="scheduled-operation__move-controls">
         <button
           type="button"
           aria-label="Przesuń wyżej"
@@ -77,7 +77,7 @@
         </button>
       </div>
 
-      <div class="pending-operation__delete-control">
+      <div class="scheduled-operation__delete-control">
         <button
           type="button"
           aria-label="Usuń operację"

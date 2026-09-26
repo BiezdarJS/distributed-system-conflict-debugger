@@ -1,0 +1,16 @@
+@let scheduledOperationsListData = scheduledOperationsList();
+
+@if (scheduledOperationsListData?.length) {
+  @for (
+    scheduledOperationItem of scheduledOperationsListData;
+    track scheduledOperationItem.id;
+    let last = $last
+  ) {
+    <li
+      class="my-2"
+      ds-scheduled-operation
+      [scheduledOperationItem]="scheduledOperationItem"
+      [ngClass]="{ 'mb-2': !last }"
+    ></li>
+  }
+}

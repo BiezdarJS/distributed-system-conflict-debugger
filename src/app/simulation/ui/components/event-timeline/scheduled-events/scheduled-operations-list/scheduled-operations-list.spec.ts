@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PendingOperationsList } from './pending-operations-list';
+import { PendingOperationsList } from './scheduled-operations-list';
 
 describe('PendingOperationsList', () => {
   let component: PendingOperationsList;
@@ -8,9 +8,8 @@ describe('PendingOperationsList', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [PendingOperationsList]
-    })
-    .compileComponents();
+      imports: [PendingOperationsList],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(PendingOperationsList);
     component = fixture.componentInstance;

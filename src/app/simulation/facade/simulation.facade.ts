@@ -9,9 +9,7 @@ import { ScheduledOperation } from '@shared/models/event/client/scheduled-operat
 export class SimulationFacade {
   private engine = inject(Engine);
 
-  public startSimulation(scheduledOperationsMock: ScheduledOperation[]) {
-    this.engine
-      .executeTasksInOrder(scheduledOperationsMock)
-      .subscribe((data) => console.log('data: ', data));
+  public startSimulation(scheduledOperationsMock: ScheduledOperation[]): void {
+    this.engine.executeTasksInOrder(scheduledOperationsMock).subscribe();
   }
 }
